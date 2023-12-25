@@ -11,4 +11,10 @@ public class ParserUtils {
     final Element item = element.selectFirst(selector);
     return item == null ? "" : item.text();
   }
+
+  public static String selectFirstAttrOrEmpty(final Element element, final String selector,
+      final String attr) {
+    final Element item = element.selectFirst(selector);
+    return item == null ? "" : item.attr(attr);
+  }
 }
