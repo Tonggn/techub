@@ -21,5 +21,5 @@ public class Publisher extends BaseDatetime {
 
   private String rssLink;
 
-  private String imagePath;
+  private String logoName;
 }
