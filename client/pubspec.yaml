@@ -47,5 +47,5 @@ flutter:
   fonts:
    - family: Pretendard
      fonts:
-       - asset: asset/font/pretendard-variable.ttf
+       - asset: asset/font/pretendard_variable.ttf
 
