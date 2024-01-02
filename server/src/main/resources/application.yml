@@ -26,3 +26,8 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type: TRACE
+
+techub:
+  images:
+    dir: ${IMAGES_DIR}
+    url: /images
