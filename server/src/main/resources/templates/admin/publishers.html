@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::main})}">
-xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Publishers</title>
 </head>
 <body>
 <main class="container">
-  <h1>Publishers</h1>
+  <h2>Publishers</h2>
   <table class="table table-striped">
     <thead>
     <tr>
       <th>ID</th>
       <th>Name</th>
       <th>RssLink</th>
-      <th>LogoName</th>
+      <th>logoUrl</th>
       <th>CreatedAt</th>
       <th>UpdatedAt</th>
     </tr>
     </thead>
+
     <tbody>
     <tr th:each="publisher : ${publishers}">
       <td th:text="${publisher.id}">ID</td>
       <td th:text="${publisher.name}">Name</td>
       <td th:text="${publisher.rssLink}">RssLink</td>
-      <td th:text="${publisher.logoName}">LogoName</td>
+      <td>
+        <a th:href="${publisher.logoUrl}">
+          <img style="max-width: 100px; max-height: 100px;" th:src="${publisher.logoUrl}"/>
+        </a>
+      </td>
       <td th:text="${publisher.createdAt}">CreatedAt</td>
       <td th:text="${publisher.updatedAt}">UpdatedAt</td>
       <td>
-
         <a class="btn btn-primary"
            th:href="@{/admin/publishers/{id}(id=${publisher.id})}">Edit</a>
-        <!-- TODO request by DELETE method -->
         <a class="btn btn-danger" th:href="@{/admin/publishers/{id}(id=${publisher.id})}">Delete</a>
       </td>
     </tr>

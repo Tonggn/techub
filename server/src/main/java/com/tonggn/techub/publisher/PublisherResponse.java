@@ -6,7 +6,7 @@ public record PublisherResponse(
     Long id,
     String name,
     String rssLink,
-    String logoName,
+    String logoUrl,
     LocalDateTime createdAt,
     LocalDateTime updatedAt
 ) {
@@ -16,7 +16,7 @@ public record PublisherResponse(
         publisher.getId(),
         publisher.getName(),
         publisher.getRssLink(),
-        publisher.getLogoName(),
+        publisher.getLogoUrl(),
         publisher.getCreatedAt(),
         publisher.getUpdatedAt()
     );
