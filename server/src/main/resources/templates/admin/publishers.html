@@ -22,7 +22,11 @@
     <tr th:each="publisher : ${publishers}">
       <td th:text="${publisher.id}">ID</td>
       <td th:text="${publisher.name}">Name</td>
-      <td th:text="${publisher.rssLink}">RssLink</td>
+      <td>
+        <a th:href="${publisher.rssLink}" th:text="${publisher.rssLink()}">
+          RssLink
+        </a>
+      </td>
       <td>
         <a th:href="${publisher.logoUrl}">
           <img style="max-width: 100px; max-height: 100px;" th:src="${publisher.logoUrl}"/>
@@ -30,14 +34,11 @@
       </td>
       <td th:text="${publisher.createdAt}">CreatedAt</td>
       <td th:text="${publisher.updatedAt}">UpdatedAt</td>
-      <td>
-        <a class="btn btn-primary"
-           th:href="@{/admin/publishers/{id}(id=${publisher.id})}">Edit</a>
-        <a class="btn btn-danger" th:href="@{/admin/publishers/{id}(id=${publisher.id})}">Delete</a>
-      </td>
     </tr>
     </tbody>
   </table>
+
+  <hr/>
 
   <h2>Add Publisher</h2>
   <form enctype="multipart/form-data" method="post">
