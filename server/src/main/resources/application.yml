@@ -31,3 +31,6 @@ techub:
   images:
     dir: ${IMAGES_DIR}
     url: /images
+    publisher:
+      logo-dir: ${IMAGES_DIR}/publisher/logo
+      logo-url: /images/publisher/logo

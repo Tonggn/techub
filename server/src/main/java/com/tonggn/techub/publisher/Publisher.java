@@ -26,4 +26,13 @@ public class Publisher extends BaseDatetime {
   private String rssLink;
 
   private String logoUrl;
+
+  public Publisher(final String name, final String rssLink) {
+    this.name = name;
+    this.rssLink = rssLink;
+  }
+
+  public void updateLogoUrl(final String logoUrl) {
+    this.logoUrl = logoUrl;
+  }
 }

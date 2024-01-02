@@ -38,7 +38,24 @@
     </tr>
     </tbody>
   </table>
-  <a class="btn btn-primary" th:href="@{/admin/publishers/create}">Create</a>
+
+  <h2>Add Publisher</h2>
+  <form enctype="multipart/form-data" method="post">
+    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+    <div class="mb-3">
+      <label class="form-label" for="inputPublisherName">Name</label>
+      <input class="form-control" id="inputPublisherName" name="name" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="inputPublisherRssLink">RssLink</label>
+      <input class="form-control" id="inputPublisherRssLink" name="rssLink" type="url">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="inputPublisherLogo">Logo</label>
+      <input class="form-control" id="inputPublisherLogo" name="logoFile" type="file">
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
 </main>
 </body>
 </html>
