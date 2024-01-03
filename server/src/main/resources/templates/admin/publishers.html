@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+  <title>Publishers</title>
+</head>
+<body>
+<main class="container">
+  <h2>Publishers</h2>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>RssLink</th>
+      <th>logoUrl</th>
+      <th>CreatedAt</th>
+      <th>UpdatedAt</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="publisher : ${publishers}">
+      <td th:text="${publisher.id}">ID</td>
+      <td th:text="${publisher.name}">Name</td>
+      <td>
+        <a th:href="${publisher.rssLink}" th:text="${publisher.rssLink()}">
+          RssLink
+        </a>
+      </td>
+      <td>
+        <a th:href="${publisher.logoUrl}">
+          <img style="max-width: 100px; max-height: 100px;" th:src="${publisher.logoUrl}"/>
+        </a>
+      </td>
+      <td th:text="${publisher.createdAt}">CreatedAt</td>
+      <td th:text="${publisher.updatedAt}">UpdatedAt</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <hr/>
+
+  <h2>Add Publisher</h2>
+  <form enctype="multipart/form-data" method="post">
+    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+    <div class="mb-3">
+      <label class="form-label" for="inputPublisherName">Name</label>
+      <input class="form-control" id="inputPublisherName" name="name" type="text">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="inputPublisherRssLink">RssLink</label>
+      <input class="form-control" id="inputPublisherRssLink" name="rssLink" type="url">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="inputPublisherLogo">Logo</label>
+      <input class="form-control" id="inputPublisherLogo" name="logoFile" type="file">
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</main>
+</body>
+</html>

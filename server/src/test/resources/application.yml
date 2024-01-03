@@ -1,0 +1,7 @@
+techub:
+  images:
+    dir: src/test/resources/images
+    url: /images
+    publisher:
+      logo-dir: src/test/resources/images
+      logo-url: images/publisher/logo

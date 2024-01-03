@@ -2,6 +2,7 @@ package com.tonggn.techub.feed;
 
 import com.tonggn.techub.base.BaseDatetime;
 import com.tonggn.techub.publisher.Publisher;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +24,10 @@ public class Feed extends BaseDatetime {
   @ManyToOne
   private Publisher publisher;
 
+  @Column(nullable = false)
   private String title;
 
+  @Column(nullable = false, unique = true)
   private String link;
 
   private String description;
