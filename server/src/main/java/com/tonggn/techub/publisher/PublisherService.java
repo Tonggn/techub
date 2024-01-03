@@ -44,15 +44,19 @@ public class PublisherService {
   }
 
   @Transactional
-  public void addPublisher(final PublisherAddRequest request) {
+  public PublisherResponse addPublisher(final PublisherAddRequest request) {
     final Publisher publisher = new Publisher(request.getName(), request.getRssLink());
     publisherRepository.save(publisher);
 
     if (request.hasLogoFile()) {
       final String filename = generateFilename(request.getLogoFile());
       saveFile(request.getLogoFile(), filename);
-      publisher.updateLogoUrl(logoUrl + "/" + filename);
+
+      final String logoUrl = this.logoUrl + "/" + filename;
+      publisher.updateLogoUrl(logoUrl);
     }
+
+    return PublisherResponse.from(publisher);
   }
 
   private void saveFile(final MultipartFile file, final String filename) {
