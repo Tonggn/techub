@@ -22,6 +22,11 @@ spring:
       password: ${ADMIN_PASSWORD}
       roles: ADMIN
 
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 1MB
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
