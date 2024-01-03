@@ -1,6 +1,7 @@
 package com.tonggn.techub.publisher;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
@@ -125,6 +127,42 @@ class PublisherServiceTest {
           () -> assertThat(publisher.getLogoUrl()).startsWith(logoUrl),
           () -> assertThat(publisher.getLogoUrl()).doesNotEndWithIgnoringCase(filename)
       );
+    }
+
+    @Test
+    @DisplayName("Publisher의 이름이 중복될 경우 예외가 발생한다")
+    void addPublisherWithDuplicatedName() {
+      // given
+      final String rssLink1 = "https://rss.link/1";
+      final String rssLink2 = "https://rss.link/2";
+
+      final Publisher publisher = new Publisher(request.getName(), rssLink1);
+      publisherRepository.save(publisher);
+
+      request.setRssLink(rssLink2);
+
+      // when
+      // then
+      assertThatThrownBy(() -> publisherService.addPublisher(request))
+          .isInstanceOf(DataIntegrityViolationException.class);
+    }
+
+    @Test
+    @DisplayName("Publisher의 rssLink가 중복될 경우 예외가 발생한다")
+    void addPublisherWithDuplicatedRssLink() {
+      // given
+      final String name1 = "publisher1";
+      final String name2 = "publisher2";
+
+      final Publisher publisher = new Publisher(name1, request.getRssLink());
+      publisherRepository.save(publisher);
+
+      request.setName(name2);
+
+      // when
+      // then
+      assertThatThrownBy(() -> publisherService.addPublisher(request))
+          .isInstanceOf(DataIntegrityViolationException.class);
     }
   }
 }
