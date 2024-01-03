@@ -15,7 +15,7 @@ public class PublisherAddRequest {
   @Size(min = 1, max = 255)
   private String name;
 
-  @URL
+  @URL(protocol = "https")
   @NotBlank
   @Size(min = 1, max = 255)
   private String rssLink;
