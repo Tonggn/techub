@@ -1,6 +1,6 @@
 package com.tonggn.techub.crawler;
 
-public record ParseResponse(
+public record ParsedFeed(
     String title,
     String link,
     String description,

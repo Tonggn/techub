@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FrontParser {
 
-  private final Map<RssType, Function<Document, List<ParseResponse>>> parserMap = new EnumMap<>(
+  private final Map<RssType, Function<Document, List<ParsedFeed>>> parserMap = new EnumMap<>(
       RssType.class);
 
   public FrontParser() {
@@ -21,7 +21,7 @@ public class FrontParser {
     parserMap.put(RssType.ATOM, AtomParser::parse);
   }
 
-  public List<ParseResponse> parse(final Document document) {
+  public List<ParsedFeed> parse(final Document document) {
     final Document xml = document.parser(xmlParser());
     final RssType type = getRssType(xml);
     return parserMap.get(type).apply(xml);
