@@ -1,7 +1,6 @@
 package com.tonggn.techub.admin;
 
 import com.tonggn.techub.publisher.PublisherAddRequest;
-import com.tonggn.techub.publisher.PublisherService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class AdminController {
 
-  private final PublisherService publisherService;
+  private final AdminService adminService;
 
   @GetMapping("/publishers")
   public String showPublishers(
@@ -24,13 +23,13 @@ public class AdminController {
       @RequestParam(defaultValue = "0") final Integer page,
       @RequestParam(defaultValue = "20") final Integer size
   ) {
-    model.addAttribute("publishers", publisherService.findPageByLatest(page, size));
+    model.addAttribute("publishers", adminService.findPublishersByLatest(page, size));
     return "admin/publishers";
   }
 
   @PostMapping("/publishers")
   public String addPublisher(@Valid final PublisherAddRequest request) {
-    publisherService.addPublisher(request);
+    adminService.addPublisher(request);
     return "redirect:/admin/publishers";
   }
 }

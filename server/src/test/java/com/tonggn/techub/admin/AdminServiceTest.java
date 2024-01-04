@@ -1,9 +1,12 @@
-package com.tonggn.techub.publisher;
+package com.tonggn.techub.admin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.tonggn.techub.publisher.Publisher;
+import com.tonggn.techub.publisher.PublisherAddRequest;
+import com.tonggn.techub.publisher.PublisherRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,10 +21,10 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
 @SpringBootTest
-class PublisherServiceTest {
+class AdminServiceTest {
 
   @Autowired
-  private PublisherService publisherService;
+  private AdminService adminService;
   @Autowired
   private PublisherRepository publisherRepository;
 
@@ -53,7 +56,7 @@ class PublisherServiceTest {
     // when
     final int pageNum = 0;
     final int size = 2;
-    final Page<PublisherResponse> page = publisherService.findPageByLatest(pageNum, size);
+    final Page<PublisherResponse> page = adminService.findPublishersByLatest(pageNum, size);
 
     // then
     assertAll(
@@ -91,7 +94,7 @@ class PublisherServiceTest {
     void addPublisherWithoutLogoFile() {
       // given
       // when
-      final PublisherResponse response = publisherService.addPublisher(request);
+      final PublisherResponse response = adminService.addPublisher(request);
 
       // then
       final Publisher publisher = publisherRepository.findById(response.id())
@@ -114,7 +117,7 @@ class PublisherServiceTest {
       request.setLogoFile(logoFile);
 
       // when
-      final PublisherResponse response = publisherService.addPublisher(request);
+      final PublisherResponse response = adminService.addPublisher(request);
 
       // then
       final Publisher publisher = publisherRepository.findById(response.id())
@@ -143,7 +146,7 @@ class PublisherServiceTest {
 
       // when
       // then
-      assertThatThrownBy(() -> publisherService.addPublisher(request))
+      assertThatThrownBy(() -> adminService.addPublisher(request))
           .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -161,7 +164,7 @@ class PublisherServiceTest {
 
       // when
       // then
-      assertThatThrownBy(() -> publisherService.addPublisher(request))
+      assertThatThrownBy(() -> adminService.addPublisher(request))
           .isInstanceOf(DataIntegrityViolationException.class);
     }
   }
