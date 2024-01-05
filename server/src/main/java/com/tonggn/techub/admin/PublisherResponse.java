@@ -1,5 +1,6 @@
-package com.tonggn.techub.publisher;
+package com.tonggn.techub.admin;
 
+import com.tonggn.techub.publisher.Publisher;
 import java.time.LocalDateTime;
 
 public record PublisherResponse(
