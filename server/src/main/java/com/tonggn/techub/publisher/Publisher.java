@@ -25,7 +25,7 @@ public class Publisher extends BaseDatetime {
   @Column(nullable = false, unique = true)
   private String name;
 
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false, unique = true, length = 500)
   private String rssLink;
 
   private String logoUrl;

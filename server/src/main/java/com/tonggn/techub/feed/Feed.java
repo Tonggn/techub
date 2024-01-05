@@ -27,12 +27,15 @@ public class Feed extends BaseDatetime {
   @Column(nullable = false)
   private String title;
 
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false, unique = true, length = 500)
   private String link;
 
+  @Column(columnDefinition = "TEXT")
   private String description;
 
+  @Column(length = 500)
   private String imageUrl;
 
+  @Column(length = 50)
   private String pubDate;
 }
