@@ -5,3 +5,8 @@ techub:
     publisher:
       logo-dir: src/test/resources/images
       logo-url: images/publisher/logo
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
