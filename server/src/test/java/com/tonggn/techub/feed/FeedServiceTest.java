@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.tonggn.techub.crawler.ParsedFeed;
 import com.tonggn.techub.publisher.Publisher;
 import com.tonggn.techub.publisher.PublisherRepository;
-import fixture.FeedFixture;
-import fixture.PublisherFixture;
+import fixture.FeedBuilder;
+import fixture.PublisherBuilder;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,11 +34,15 @@ class FeedServiceTest {
   @DisplayName("새로운 피드만 저장한다")
   void saveAllTest() {
     // given
-    final Publisher publisher = PublisherFixture.newPublisher();
+    final Publisher publisher = new PublisherBuilder().build();
     publisherRepository.save(publisher);
 
-    final Feed newFeed = FeedFixture.newFeed(publisher);
-    final Feed savedFeed = FeedFixture.newFeed(publisher);
+    final Feed newFeed = new FeedBuilder()
+        .setPublisher(publisher)
+        .build();
+    final Feed savedFeed = new FeedBuilder()
+        .setPublisher(publisher)
+        .build();
     feedRepository.save(savedFeed);
 
     final int newFeedCount = 1;

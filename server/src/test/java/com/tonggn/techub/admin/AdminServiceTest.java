@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import com.tonggn.techub.publisher.Publisher;
 import com.tonggn.techub.publisher.PublisherAddRequest;
 import com.tonggn.techub.publisher.PublisherRepository;
+import fixture.PublisherBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,17 +38,9 @@ class AdminServiceTest {
   @DisplayName("최신순으로 Publisher 목록을 페이징한다")
   void paginationPublisherByLatest() {
     // given
-    final String name1 = "publisher1";
-    final String name2 = "publisher2";
-    final String name3 = "publisher3";
-
-    final String link1 = "https://rss1.link";
-    final String link2 = "https://rss2.link";
-    final String link3 = "https://rss3.link";
-
-    final Publisher publisher1 = new Publisher(name1, link1);
-    final Publisher publisher2 = new Publisher(name2, link2);
-    final Publisher publisher3 = new Publisher(name3, link3);
+    final Publisher publisher1 = new PublisherBuilder().build();
+    final Publisher publisher2 = new PublisherBuilder().build();
+    final Publisher publisher3 = new PublisherBuilder().build();
 
     publisherRepository.save(publisher1);
     publisherRepository.save(publisher2);
@@ -64,10 +57,10 @@ class AdminServiceTest {
             .hasSize(size),
         () -> assertThat(page.getContent())
             .extracting("name")
-            .containsExactly(name3, name2),
+            .containsExactly(publisher3.getName(), publisher2.getName()),
         () -> assertThat(page.getContent())
             .extracting("rssLink")
-            .containsExactly(link3, link2)
+            .containsExactly(publisher3.getRssLink(), publisher2.getRssLink())
     );
   }
 
@@ -136,13 +129,14 @@ class AdminServiceTest {
     @DisplayName("Publisher의 이름이 중복될 경우 예외가 발생한다")
     void addPublisherWithDuplicatedName() {
       // given
-      final String rssLink1 = "https://rss.link/1";
-      final String rssLink2 = "https://rss.link/2";
+      final String duplicatedName = request.getName();
 
-      final Publisher publisher = new Publisher(request.getName(), rssLink1);
+      final Publisher publisher = new PublisherBuilder()
+          .setName(duplicatedName)
+          .build();
       publisherRepository.save(publisher);
 
-      request.setRssLink(rssLink2);
+      request.setRssLink("https://new-rss.link");
 
       // when
       // then
@@ -154,13 +148,14 @@ class AdminServiceTest {
     @DisplayName("Publisher의 rssLink가 중복될 경우 예외가 발생한다")
     void addPublisherWithDuplicatedRssLink() {
       // given
-      final String name1 = "publisher1";
-      final String name2 = "publisher2";
+      final String duplicatedRssLink = request.getRssLink();
 
-      final Publisher publisher = new Publisher(name1, request.getRssLink());
+      final Publisher publisher = new PublisherBuilder()
+          .setRssLink(duplicatedRssLink)
+          .build();
       publisherRepository.save(publisher);
 
-      request.setName(name2);
+      request.setName("new name");
 
       // when
       // then
