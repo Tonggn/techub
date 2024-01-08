@@ -1,4 +1,4 @@
-package com.tonggn.techub.publisher;
+package com.tonggn.techub.publisher.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

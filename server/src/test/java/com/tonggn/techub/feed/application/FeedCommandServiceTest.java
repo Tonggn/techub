@@ -1,10 +1,12 @@
-package com.tonggn.techub.feed;
+package com.tonggn.techub.feed.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.tonggn.techub.crawler.ParsedFeed;
-import com.tonggn.techub.publisher.Publisher;
-import com.tonggn.techub.publisher.PublisherRepository;
+import com.tonggn.techub.feed.domain.Feed;
+import com.tonggn.techub.feed.domain.FeedRepository;
+import com.tonggn.techub.publisher.domain.Publisher;
+import com.tonggn.techub.publisher.domain.PublisherRepository;
 import fixture.FeedBuilder;
 import fixture.PublisherBuilder;
 import java.util.List;
@@ -15,14 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FeedServiceTest {
+class FeedCommandServiceTest {
 
-  @Autowired
-  private FeedService feedService;
   @Autowired
   private FeedRepository feedRepository;
   @Autowired
   private PublisherRepository publisherRepository;
+  @Autowired
+  private FeedCommandService feedCommandService;
 
   @AfterEach
   void tearDown() {
@@ -53,7 +55,7 @@ class FeedServiceTest {
 
     // when
     final List<ParsedFeed> feedRequests = List.of(newFeedRequest, savedFeedRequest);
-    feedService.saveAll(publisher.getId(), feedRequests);
+    feedCommandService.saveAll(publisher.getId(), feedRequests);
 
     // then
     assertThat(feedRepository.count()).isEqualTo(expect);

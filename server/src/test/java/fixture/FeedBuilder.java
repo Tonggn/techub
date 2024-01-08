@@ -1,7 +1,7 @@
 package fixture;
 
-import com.tonggn.techub.feed.Feed;
-import com.tonggn.techub.publisher.Publisher;
+import com.tonggn.techub.feed.domain.Feed;
+import com.tonggn.techub.publisher.domain.Publisher;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

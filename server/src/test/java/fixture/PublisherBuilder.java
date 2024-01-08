@@ -1,6 +1,6 @@
 package fixture;
 
-import com.tonggn.techub.publisher.Publisher;
+import com.tonggn.techub.publisher.domain.Publisher;
 import java.util.UUID;
 
 public class PublisherBuilder {

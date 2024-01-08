@@ -1,4 +1,4 @@
-package com.tonggn.techub.publisher;
+package com.tonggn.techub.publisher.domain;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 

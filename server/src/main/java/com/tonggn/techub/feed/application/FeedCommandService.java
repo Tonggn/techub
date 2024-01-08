@@ -1,8 +1,10 @@
-package com.tonggn.techub.feed;
+package com.tonggn.techub.feed.application;
 
 import com.tonggn.techub.crawler.ParsedFeed;
-import com.tonggn.techub.publisher.Publisher;
-import com.tonggn.techub.publisher.PublisherRepository;
+import com.tonggn.techub.feed.domain.Feed;
+import com.tonggn.techub.feed.domain.FeedRepository;
+import com.tonggn.techub.publisher.domain.Publisher;
+import com.tonggn.techub.publisher.domain.PublisherRepository;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -11,14 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
-public class FeedService {
+public class FeedCommandService {
 
   private final FeedRepository feedRepository;
   private final PublisherRepository publisherRepository;
 
-  @Transactional
   public void saveAll(final Long publisherId, final List<ParsedFeed> parsedFeeds) {
     final Publisher publisher = publisherRepository.findById(publisherId)
         .orElseThrow();

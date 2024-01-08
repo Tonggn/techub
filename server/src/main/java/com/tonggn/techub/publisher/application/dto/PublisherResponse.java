@@ -1,6 +1,6 @@
-package com.tonggn.techub.admin;
+package com.tonggn.techub.publisher.application.dto;
 
-import com.tonggn.techub.publisher.Publisher;
+import com.tonggn.techub.publisher.domain.Publisher;
 import java.time.LocalDateTime;
 
 public record PublisherResponse(

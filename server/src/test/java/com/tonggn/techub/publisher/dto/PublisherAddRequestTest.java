@@ -1,8 +1,9 @@
-package com.tonggn.techub.publisher;
+package com.tonggn.techub.publisher.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.tonggn.techub.publisher.application.dto.PublisherAddRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;

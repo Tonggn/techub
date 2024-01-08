@@ -1,9 +1,9 @@
-package com.tonggn.techub.feed;
+package com.tonggn.techub.feed.domain;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.tonggn.techub.base.BaseDatetime;
-import com.tonggn.techub.publisher.Publisher;
+import com.tonggn.techub.publisher.domain.Publisher;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

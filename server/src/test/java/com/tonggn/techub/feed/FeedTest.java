@@ -3,6 +3,7 @@ package com.tonggn.techub.feed;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.tonggn.techub.feed.domain.Feed;
 import fixture.FeedBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
