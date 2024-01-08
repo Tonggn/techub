@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class FeedBuilder {
 
-  private Publisher publisher;
+  private Publisher publisher = new PublisherBuilder().build();
   private String title = UUID.randomUUID().toString();
   private String link = "https://rss.link/" + UUID.randomUUID();
   private String description = UUID.randomUUID().toString();
